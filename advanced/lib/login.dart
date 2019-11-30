@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'package:Shrine/colors.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -42,37 +43,46 @@ class _LoginPageState extends State<LoginPage> {
             // TODO: Wrap Username with AccentColorOverride (103)
             // TODO: Remove filled: true values (103)
             // TODO: Wrap Password with AccentColorOverride (103)
-            TextField(
-              decoration: InputDecoration(
-                filled: false,
-                labelText: 'Username',
+            _AccentColorOverride(
+              color: shrineBrown900,
+              child: TextField(
+                decoration: InputDecoration(
+                  labelText: 'Username',
+                ),
+                controller: _usernameController,
               ),
-              controller: _usernameController,
             ),
             SizedBox(height: 12.0),
-            TextField(
-              decoration: InputDecoration(
-                filled: false,
-                labelText: 'Password',
+            _AccentColorOverride(
+              color: shrineBrown900,
+              child: TextField(
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                ),
+                controller: _passwordController,
+                obscureText: true,
               ),
-              controller: _passwordController,
-              obscureText: true,
             ),
             ButtonBar(
               children: <Widget>[
                 FlatButton(
-                  child: Text("Cancel"),
-                  onPressed: () {
-                    _usernameController.clear();
-                    _passwordController.clear();
-                  },
-                ),
+                    child: Text("Cancel"),
+                    onPressed: () {
+                      _usernameController.clear();
+                      _passwordController.clear();
+                    },
+                    shape: BeveledRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                    )),
                 RaisedButton(
-                  child: Text("Next"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                )
+                    child: Text("Next"),
+                    elevation: 8,
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    shape: BeveledRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                    ))
               ],
             )
           ],
@@ -82,4 +92,24 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-// TODO: Add AccentColorOverride (103)
+class _AccentColorOverride extends StatelessWidget {
+  const _AccentColorOverride({
+    Key key,
+    this.color,
+    this.child,
+  }) : super(key: key);
+
+  final Color color;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Theme(
+      child: child,
+      data: Theme.of(context).copyWith(
+        accentColor: color,
+        brightness: Brightness.dark,
+      ),
+    );
+  }
+}
