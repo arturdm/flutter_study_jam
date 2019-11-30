@@ -14,6 +14,9 @@ const shrineErrorRed = const Color(0xFFC5032B);
 const shrineSurfaceWhite = const Color(0xFFFFFBFA);
 const shrineBackgroundWhite = Colors.white;
 
+const shrinePurple = Color(0xFF5D1049);
+const shrineBlack = Color(0xFF000000);
+
 ThemeData createTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
@@ -23,7 +26,7 @@ ThemeData createTheme() {
         buttonColor: shrinePink100,
         textTheme: ButtonTextTheme.normal,
       ),
-      scaffoldBackgroundColor: shrineBackgroundWhite,
+      scaffoldBackgroundColor: shrineSurfaceWhite,
       cardColor: shrineBackgroundWhite,
       textSelectionColor: shrinePink100,
       errorColor: shrineErrorRed,
